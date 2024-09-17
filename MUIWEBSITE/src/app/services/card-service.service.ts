@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class CardServiceService {
   constructor(private http: HttpClient) {}
   getData(): Observable<any> {
-    const apiUrl = 'https://fakestoreapi.com/products?limit=8';
+    const apiUrl = 'https://fakestoreapi.com/products?limit=10';
     return this.http.get(apiUrl);
   }
 }

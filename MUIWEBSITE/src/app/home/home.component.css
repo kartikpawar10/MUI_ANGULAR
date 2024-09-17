@@ -1,10 +1,4 @@
-section {
-  height: 100vh;
-  main {
-    display: flex;
-
-    app-card {
-      flex-grow: 1;
-    }
-  }
+main {
+  height: 100%;
+  display: flex;
 }

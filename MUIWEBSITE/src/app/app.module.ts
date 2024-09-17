@@ -19,6 +19,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { CardServiceService } from './services/card-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -42,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     RouterLink,
     HttpClientModule,
+    MatIconModule,
   ],
   providers: [CardServiceService],
   bootstrap: [AppComponent],
