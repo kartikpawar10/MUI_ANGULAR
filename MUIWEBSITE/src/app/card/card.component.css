@@ -1,0 +1,15 @@
+.example-card {
+  display: inline-block;
+  margin: 10px;
+}
+.card-body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+.example-header-image {
+  width: 250px;
+  height: 250px;
+}
