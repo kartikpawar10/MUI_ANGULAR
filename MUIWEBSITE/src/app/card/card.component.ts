@@ -12,12 +12,10 @@ export class CardComponent {
   cards: any;
   cardServiceObservable$: Observable<any> | undefined;
   ngOnInit(): void {
-     this.cardService
-      .getData()
-      .subscribe((data) => {
-        console.log(data);
-        this.cards = data;
-      })),
+    this.cardService.getData().subscribe((data) => {
+      console.log(data);
+      this.cards = data;
+    }),
       (error: any) => console.log(error);
   }
   ngOnDestroy(): void {}
