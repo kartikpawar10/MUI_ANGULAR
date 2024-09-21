@@ -26,8 +26,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { DataEffects } from './store/root.effects';
-import { rootReducer } from './store/root.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
@@ -58,8 +56,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatIconModule,
     MatGridListModule,
     CommonModule,
-    StoreModule.forRoot({ arrayVal: rootReducer }),
-    EffectsModule.forRoot([DataEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [CardServiceService],

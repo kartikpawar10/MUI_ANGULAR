@@ -1,27 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { loadProducts } from 'src/app/store/root.action';
-import { selectArrayValue } from 'src/app/store/root.selectors';
+import { PostsStore } from './card.store';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
+  providers: [PostsStore],
 })
 export class CardComponent implements OnInit {
-  cards$: Observable<any>;
-  cards: any;
-  constructor(private store: Store<any>) {
+  // cards: any;
+  // arrayVal$!: Observable<any>;
+  // error$!: Observable<boolean>;
+  // process$!: Observable<boolean>;
+
+  vm$ = this.postStore.vm$;
+  constructor(private postStore: PostsStore) {
+    this.postStore.getPosts();
     console.log('HELLO CONSOLE LOG');
-    this.cards$ = this.store.pipe(select(selectArrayValue));
   }
   ngOnInit() {
     console.log('HELLO CONSOLE LOGGING');
-    this.store.dispatch(loadProducts());
-    this.cards$.pipe().subscribe((res) => {
-      console.log({ res });
-      this.cards = res;
-    });
   }
 }
