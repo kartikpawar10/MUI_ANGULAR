@@ -2,15 +2,15 @@
   <div *ngFor="let card of cards">
     <mat-card class="example-card" appearance="outlined">
       <img mat-card-image [src]="card.image" alt="Photo of a {{ card.title }}" class="example-header-image" />
-
       <div class=" headings">
         <mat-card-content>
           <span class="title">{{ card.title }}</span>
         </mat-card-content>
         <mat-card-actions class="buttons">
-          <!-- <button mat-button>BUY</button> -->
-          <mat-icon svgIcon="thumbs-up" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
-          <button mat-button>ADD TO CART</button>
+          <button mat-button class="btn"><mat-icon aria-hidden="false" aria-label="Example add_shopping_cart icon"
+              fontIcon="add_shopping_cart"></mat-icon></button>
+          <button mat-button class="btn"><mat-icon aria-hidden="false" aria-label="Example favorite icon"
+              fontIcon="favorite"></mat-icon></button>
         </mat-card-actions>
       </div>
     </mat-card>

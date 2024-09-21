@@ -7,10 +7,14 @@
         <a routerLink="/" mat-button>Home</a>
         <a routerLink="/contact" mat-button>Contact</a>
         <a routerLink="/write" mat-button>Write</a>
-        <a routerLink="/Docs" mat-button>Docs</a>
+        <a routerLink="/docs" mat-button>Docs</a>
     </div>
     <div class="nav-bar">
-        <button mat-flat-button id="loginBtn">Login</button>
-        <button mat-flat-button id="signUpBtn">SignUp</button>
+        <span *ngIf='flag'>
+            <button mat-flat-button id="loginBtn">Login</button>
+        </span>
+        <span *ngIf='flag === false'>
+            <button mat-flat-button id="signUpBtn" routerLink="/signup" onclick="flag = !flag">SignUp</button>
+        </span>
     </div>
 </mat-toolbar>

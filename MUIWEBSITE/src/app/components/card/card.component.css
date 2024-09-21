@@ -1,7 +1,7 @@
 .example-card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   width: 250px;
-  height: 350px;
+  height: 320px;
   align-items: center;
 }
 .card-body {
@@ -9,7 +9,9 @@
   grid-template-columns: auto auto auto auto auto;
   align-items: center;
   align-content: center;
-  gap: 10px;
+  /* gap: 20px; */
+  column-gap: 8px;
+  row-gap: 10px;
   margin-top: 10px;
 }
 .example-header-image {
@@ -29,6 +31,12 @@
 }
 
 .buttons {
-  position: absolute;
-  top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 100%;
+}
+
+.btn {
+  z-index: 0;
 }

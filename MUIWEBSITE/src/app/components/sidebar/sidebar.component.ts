@@ -14,10 +14,10 @@ export class SidebarComponent {
 
   ngOnInit(): void {
     this.filterForm = this.fb.group({
-      option1: [false],
-      option2: [false],
-      option3: [false],
-      option4: [false],
+      electronics: [false],
+      jewelery: [false],
+      mensClothing: [false],
+      womenClothing: [false],
     });
 
     this.filterForm.valueChanges.subscribe((selectedFilters) => {
