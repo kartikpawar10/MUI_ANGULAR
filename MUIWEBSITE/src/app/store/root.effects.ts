@@ -17,7 +17,6 @@ export class DataEffects {
     this.actions$.pipe(ofType(rootActions.loadProducts), () =>
       this.cardService.getData().pipe(
         map((response) => {
-          console.log({ response });
           return rootActions.loadProductsSuccess({ products: response });
         }),
         catchError((error) => {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { loadFilteredDataSuccess } from 'src/app/store/root.action';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,9 +10,9 @@ import { Store } from '@ngrx/store';
 })
 export class SidebarComponent {
   filterForm!: FormGroup;
-  showFiller: boolean = false;
-  mymap: Map<string, number> = new Map();
   filteredData = new Set();
+  mymap: Map<string, number> = new Map();
+  showFiller: boolean = false;
 
   constructor(private fb: FormBuilder, private store: Store<any>) {
     this.mymap.set('electronics', 1);
@@ -29,17 +30,21 @@ export class SidebarComponent {
     });
 
     this.filterForm.valueChanges.subscribe((selectedFilters) => {
-      console.log(selectedFilters);
-      Object.keys(selectedFilters).forEach((key) => {
-        let a = Number(this.mymap.get(key));
-        if (selectedFilters[key]) {
-          console.log(1333, key);
-          this.filteredData.add(a);
-        } else if (!selectedFilters[key]) {
-          this.filteredData.delete(a);
-        }
-      });
-      console.log('Data', this.filteredData);
+      this.getData(selectedFilters);
     });
+  }
+
+  getData(selectedFilters: any) {
+    Object.keys(selectedFilters).forEach((key) => {
+      let a = Number(this.mymap.get(key));
+      if (selectedFilters[key]) {
+        this.filteredData.add(a);
+      } else if (!selectedFilters[key]) {
+        this.filteredData.delete(a);
+      }
+    });
+    this.store.dispatch(
+      loadFilteredDataSuccess({ filterDataArray: this.filteredData })
+    );
   }
 }
