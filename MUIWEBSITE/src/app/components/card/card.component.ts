@@ -1,28 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { loadProducts } from 'src/app/store/root.action';
-import {
-  selectArrayValue,
-  selectFilterDataArrayValue,
-} from 'src/app/store/root.selectors';
+import { selectArrayValue } from 'src/app/store/root.selectors';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
-export class CardComponent implements OnInit {
-  cards$: Observable<any>;
-  filterdData$: Observable<any>;
+export class CardComponent implements OnInit, OnChanges {
+  cards$: any;
   cards: any[] = [];
-  cardsEmpty: any[] = [];
-  savedSet: any;
+  filteredCards: any[] = [];
   mymap: Map<string, number> = new Map();
+  @Input() parentData!: Set<number>;
 
   constructor(private store: Store<any>) {
     this.cards$ = this.store.pipe(select(selectArrayValue));
-    this.filterdData$ = this.store.pipe(select(selectFilterDataArrayValue));
     this.mymap.set('electronics', 1);
     this.mymap.set('jewelery', 2);
     this.mymap.set("men's clothing", 3);
@@ -31,36 +31,31 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(loadProducts());
-    // Subscribe to the cards$ observable
-    this.cards$.pipe().subscribe((res) => {
-      if (Array.isArray(res)) {
-        this.cards = res;
-      } else {
-        console.error('Cards data is not an array:', res);
-      }
-    });
-    this.filterdData$.pipe().subscribe((data: any) => {
-      this.savedSet = data;
-      if (Array.isArray(this.cards)) {
-        this.cards = this.cards.map((el: any) => {
-          return {
-            ...el,
-            id: Number(this.mymap.get(el.category)),
-          };
-        });
-        console.log('Updated ::', this.cards);
-      } else {
-        console.error('Cards is not an array:', this.cards);
-      }
 
-      if (Array.isArray(this.cards)) {
-        this.cards = this.cards.filter((el: any) => {
-          return this.savedSet.has(el.id);
-        });
-        console.log('Updated ::', this.cards);
-      } else {
-        console.error('Cards is not an array:', this.cards);
-      }
+    this.cards$.subscribe((res: any) => {
+      this.cards = res.map((el: any) => ({
+        ...el,
+        id: Number(this.mymap.get(el.category)),
+      }));
+
+      this.filterCards();
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['parentData'] && !changes['parentData'].firstChange) {
+      this.filterCards();
+    }
+  }
+
+  filterCards() {
+    if (this.parentData && this.parentData.size > 0) {
+      this.filteredCards = this.cards.filter((card: any) =>
+        this.parentData.has(card.id)
+      );
+    } else {
+      this.filteredCards = this.cards;
+    }
+    console.log(this.filteredCards);
   }
 }

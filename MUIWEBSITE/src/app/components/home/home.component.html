@@ -1,4 +1,4 @@
-<main class="main-wrapper">
-    <app-sidebar></app-sidebar>
-    <app-card></app-card>
+<main class="home-container">
+    <app-sidebar (redirect)="handleRedirect($event)"></app-sidebar>
+    <app-card [parentData]="parentData"></app-card>
 </main>
