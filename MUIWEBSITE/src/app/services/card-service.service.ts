@@ -11,4 +11,8 @@ export class CardServiceService {
     const apiUrl = 'https://fakestoreapi.com/products?limit=10';
     return this.http.get(apiUrl);
   }
+
+  getDataWithSearchValue(category: string) {
+    const apiUrl = `https://fakestoreapi.com/products/category/${category}?limit=10`;
+  }
 }

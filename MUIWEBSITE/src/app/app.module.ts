@@ -1,3 +1,4 @@
+import { MatTableModule } from '@angular/material/table';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from './components/card/card.component';
@@ -29,6 +30,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DataEffects } from './store/root.effects';
 import { filterReducer, rootReducer } from './store/root.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     SignUpComponent,
   ],
   imports: [
+    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -58,6 +61,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatIconModule,
     MatGridListModule,
     CommonModule,
+    FormsModule,
+    MatPaginatorModule,
     StoreModule.forRoot({ arrayVal: rootReducer, filterData: filterReducer }),
     EffectsModule.forRoot([DataEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
